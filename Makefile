@@ -1,5 +1,5 @@
 all:
-	@echo "Please execute ./test.sh"
+	@echo "Please execute ./test_semihost.sh"
 
 clean:
 	rm -f hello.elf
