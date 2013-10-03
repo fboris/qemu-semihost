@@ -1,11 +1,18 @@
 #include <stdio.h>
 #include <inttypes.h>
 
-#define READ_COUNTER_ADDR 0x40050000
-
-int32_t *read_counter = (int32_t *) READ_COUNTER_ADDR;
 int main(void)
 {
-	
+	char input[80];
+	FILE * myLog;
+	char ch;
+	puts("You has called a semi-host. enter y to write a log");
+	puts("reading file from workspace....\n");
+	myLog = fopen("myLog", "a");//append file
+	puts("Please write some log!\n");
+	gets(input);
+	fprintf(myLog ,"%s\n", input);
+	fclose(myLog);
+
 	return 0;
 }
