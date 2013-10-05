@@ -6,7 +6,7 @@ int main(void)
 	char input[80];
 	FILE * myLog;
 	char ch;
-	puts("You has called a semi-host. enter y to write a log");
+	puts("You called a semi-host. enter y to write a log");
 	puts("reading file from workspace....\n");
 	myLog = fopen("myLog", "a");//append file
 	puts("Please write some log!\n");
