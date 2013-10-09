@@ -16,4 +16,5 @@ This is my logfile.
 This is my logfile.
 This is my logfile.
 This is my logfile.
-
+this is a messagethis is another message
+2013101010

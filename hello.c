@@ -8,12 +8,12 @@
 #define BUFFER_SIZE 100
 int main(void)
 {
-	int fd = open( FILE_PATH, O_RDONLY);
+	int fd = open( FILE_PATH, O_RDWR);
 	char buff[BUFFER_SIZE];
 	int byte_len;
 	buff[BUFFER_SIZE-1] = '\0';
 	/*error handling*/
-	if( fd == -1){
+	if( fd == EOF ){
 		printf("file not found\n");
 		return 0;
 	}
@@ -26,7 +26,7 @@ int main(void)
 	while(1){
 		byte_len = read( fd, buff, BUFFER_SIZE-1);//keep last one character in string is '\0'
 		if(byte_len <= 0){
-			printf("find the end of file!");
+			printf("\n=find the end of file=\n!");
 			break;
 		}
 		else{
@@ -39,6 +39,31 @@ int main(void)
 		
 	}
 	
+	int key;
+	char eat;
+	int IsDone=1;
+	while(IsDone){
+		puts("Would you like to add a record?(Y/N)");
+		key = getchar();
+		eat = getchar();//prevent gets() get '\n' character 
+		if( (key =='y') || (key=='Y') ){
+			printf("please enter your message:\n");
+			if( gets( buff) != NULL ){
+				write( fd, "\r\n", 2);
+				write( fd, buff, strlen(buff));			
+			}
+			else{
+				IsDone = 1;
+			}
+			key = 0;
+		}
+		else if( (key =='n') || (key=='N') ){
+			
+			printf("End semi-host");
+			IsDone = 0;
+
+		}
+	}
 	close(fd);
 	
 	
