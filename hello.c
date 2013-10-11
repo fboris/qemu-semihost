@@ -6,6 +6,19 @@
 
 #define FILE_PATH "./myLog.txt"
 #define BUFFER_SIZE 100
+int generate_checksum(char* str)
+{
+	int len = strlen(str);
+	char check_sum;
+
+	check_sum = str[0];
+	
+	for (int i = 1 ; i< len ; i++){
+		check_sum = check_sum^str[i];
+	}
+	return check_sum;
+
+}
 int main(void)
 {
 	int fd = open( FILE_PATH, O_RDWR);
@@ -43,16 +56,25 @@ int main(void)
 	char eat;
 	int IsDone=1;
 	while(IsDone){
-		puts("Would you like to add a record?(Y/N)");
+		puts("\r\nWould you like to add a record?(Y/N)");
 		key = getchar();
 		eat = getchar();//prevent gets() get '\n' character 
 		if( (key =='y') || (key=='Y') ){
 			printf("please enter your message:\n");
 			if( gets( buff) != NULL ){
+				int checksum = generate_checksum(buff);
+				/*pass a single char to a buffer*/
+				char temp[2] = {'\0','\0'};
+				temp[0] = checksum;
 				write( fd, "\r\n", 2);
-				write( fd, buff, strlen(buff));			
+				write( fd, buff, strlen(buff));	
+				write( fd, "#",2);
+				write( fd, temp, 2);
+				printf("\r\nYour checksum is %x", checksum);
+
 			}
 			else{
+				printf("\r\nYour typing has some error!");
 				IsDone = 1;
 			}
 			key = 0;
