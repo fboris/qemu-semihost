@@ -27,8 +27,9 @@ int main(void)
 	buff[BUFFER_SIZE-1] = '\0';
 	/*error handling*/
 	if( fd == EOF ){
-		printf("file not found\n");
-		return 0;
+		fd = open( FILE_PATH, O_CREAT);// if file isn't exist. create it.
+		printf("file not found. creating file...\n");
+		
 	}
 	else{
 		printf("found file, start reading...");
@@ -39,7 +40,7 @@ int main(void)
 	while(1){
 		byte_len = read( fd, buff, BUFFER_SIZE-1);//keep last one character in string is '\0'
 		if(byte_len <= 0){
-			printf("\n=find the end of file=\n!");
+			printf("\n=find the end of file=\n");
 			break;
 		}
 		else{
